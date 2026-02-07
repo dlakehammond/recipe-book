@@ -32,7 +32,7 @@ def cmd_list(args):
 def cmd_search(args):
     query = " ".join(args).lower()
     recipes = load_recipes()
-    matches = [r for r in recipes if query in r.name.lower() or query in r.tags]
+    matches = [r for r in recipes if query in r.name.lower() or any(query in t.lower() for t in r.tags)]
     for r in matches:
         tags = f"  [{', '.join(r.tags)}]" if r.tags else ""
         print(f"{r.id}: {r.name}{tags}")
